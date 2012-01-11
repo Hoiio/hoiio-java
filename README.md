@@ -34,7 +34,7 @@ Here are some examples you can use the SDK to access all Hoiio's API (via HoiioS
 
 	// Make an outgoing IVR
 	try {
-		ivrDial(msg, dest, callerID, tag, notifyUrl);
+		hoiioService.ivrDial(msg, dest, callerID, tag, notifyUrl);
 	} catch (HoiioException e) {
 		return e.getException();
 	}
