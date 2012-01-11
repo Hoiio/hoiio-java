@@ -21,9 +21,9 @@ public class WeatherByPhoneServlet extends HttpServlet {
 	
 	private static final String TAG_ASK_ZIP = "askZip";
 	private static final String TAG_PLAY = "play";
-	private static final String NOTIFY_URL = "NOTIFY_URL";
+	private static final String NOTIFY_URL = "[NOTIFY_URL]";
 	
-	private HoiioService hoiioService = new HoiioService("APP_ID", "ACCESS_TOKEN");	
+	private HoiioService hoiioService = new HoiioService("[APP_ID]", "[ACCESS_TOKEN]");	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

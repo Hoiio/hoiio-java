@@ -16,9 +16,9 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String TAG_CONFIRM = "confirm";
-	private static final String NOTIFY_URL = "NOTIFY_URL";
+	private static final String NOTIFY_URL = "[NOTIFY_URL]";
 	
-	private HoiioService hoiioService = new HoiioService("APP_ID", "ACCESS_TOKEN");
+	private HoiioService hoiioService = new HoiioService("[APP_ID]", "[ACCESS_TOKEN]");
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

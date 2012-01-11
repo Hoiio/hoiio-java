@@ -23,7 +23,7 @@ public class Call extends HttpServlet {
 		RequestDispatcher view;
 		
 		if (dest1 != null && !dest1.isEmpty()) {
-			String error = call(dest1, "+6596918851");
+			String error = call(dest1, "[DEST2_NUMBER]");
 			if (error != null) {
 				forward = "/index.jsp?error=" + error;
 			} else {
@@ -46,7 +46,7 @@ public class Call extends HttpServlet {
 	}
 	
 	private String call(String dest1, String dest2) {
-		HoiioService hoiioService = new HoiioService("APP_ID", "ACCESS_TOKEN");
+		HoiioService hoiioService = new HoiioService("[APP_ID]", "[ACCESS_TOKEN]");
 		
 		try {
 			hoiioService.call(dest1, dest2, null, null, null);
