@@ -1,20 +1,17 @@
-hoiio-java
------------------------------
+# hoiio-java
 Hoiio-java is a Java SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
 communications and let developers use the API via a few simple classes.
 
 Currently, hoiio-php supports the Call, SMS, Account, Hoiio Number and IVR APIs.
 
 
-Installing 
------------------------------
+# Installing 
 Place the jar file inside the lib folder to your library folder. 
 You'll need to include the dependencies yourself (the list of dependency libraries 
 can be found inside the thrid-party folder)
 
 
-Usage
------------------------------
+# Usage
 Here are some examples you can use the SDK to access all Hoiio's API (via HoiioService class)
 
 ``` java
@@ -44,8 +41,7 @@ Here are some examples you can use the SDK to access all Hoiio's API (via HoiioS
 ```
 
 
-Examples
------------------------------
+# Examples
 Most of the examples are written using Google App Engine. (you can read the details 
 on how to setup here http://code.google.com/appengine/)
 
@@ -56,14 +52,12 @@ You can run locally by using Eclipse or upload it to App Engine
 (http://code.google.com/appengine/docs/java/gettingstarted/uploading.html)
 
 
-License
------------------------------
+# License
 This project is under MIT License (http://en.wikipedia.org/wiki/MIT_License).
 See LICENSE file for details.
 
 
-Contacts
------------------------------
+# Contacts
 If you have any questions, please feel free to contact us:
 
 Twitter:        @hoiiotweets
