@@ -2,7 +2,7 @@
 Hoiio-java is a Java SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
 communications and let developers use the API via a few simple classes.
 
-Currently, hoiio-php supports the Call, SMS, Account, Hoiio Number and IVR APIs.
+Currently, hoiio-java supports the Call, SMS, Account, Hoiio Number and IVR APIs.
 
 
 # Installing
