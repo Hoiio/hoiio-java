@@ -1,4 +1,12 @@
 com.hoiio.sdk
 com.hoiio.sdk.exception
+com.hoiio.sdk.objects
+com.hoiio.sdk.objects.account
+com.hoiio.sdk.objects.enums
+com.hoiio.sdk.objects.fax
+com.hoiio.sdk.objects.ivr
+com.hoiio.sdk.objects.number
+com.hoiio.sdk.objects.sms
+com.hoiio.sdk.objects.voice
 com.hoiio.sdk.services
 com.hoiio.sdk.util

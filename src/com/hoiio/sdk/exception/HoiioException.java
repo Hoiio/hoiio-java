@@ -1,21 +1,91 @@
 package com.hoiio.sdk.exception;
 
+/*
+Copyright (C) 2012 Hoiio Pte Ltd (http://www.hoiio.com)
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+import com.hoiio.sdk.objects.enums.HoiioStatus;
+
+/**
+ * This exception is thrown whenever your request is not successful. <br/>
+ * It has the information of what the error/response is as well as all other exceptions
+ */
 public class HoiioException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String exception;
+	private HoiioStatus status;
+	private String response;
 	
+	/**
+	 * Constructs the HoiioException object
+	 */
 	public HoiioException() {
 		super();
 	}
 	
-	public HoiioException(String exception) {
-		super(exception);
-		this.exception = exception;
+	/**
+	 * Constructs the HoiioException object
+	 * @param e The exception returned by other sources
+	 */
+	public HoiioException(Exception e) {
+		super(e);
 	}
 	
-	public String getException() {
-		return exception;
+	/**
+	 * Constructs the HoiioException object
+	 * @param status The error status returned by Hoiio 
+	 */
+	public HoiioException(String status) {
+		super(status);
+		this.status = HoiioStatus.fromString(status);
+	}
+	
+	/**
+	 * Constructs the HoiioException object
+	 * @param status The error status returned by Hoiio 
+	 * @param response Full response by Hoiio
+	 */
+	public HoiioException(String status, String response) {
+		super(status);
+		this.status = HoiioStatus.fromString(status);
+		this.response = response;
+	}
+	
+	/**
+	 * Gets the Hoiio error status
+	 * @return Hoiio error status
+	 */
+	public HoiioStatus getStatus() {
+		return status;
+	}
+	
+	/**
+	 * Gets the response content by Hoiio
+	 * @return The response content by Hoiio
+	 */
+	public String getContent() {
+		return response;
 	}
 }

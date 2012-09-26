@@ -1,55 +1,56 @@
 # hoiio-java
-Hoiio-java is a Java SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
+Hoiio-java is a Java SDK for Hoiio's API. It encapsulates the REST 
 communications and let developers use the API via a few simple classes.
 
-Currently, hoiio-java supports the Call, SMS, Account, Hoiio Number and IVR APIs.
+Currently, hoiio-java supports the Call, SMS, Fax, Account, Hoiio Number and IVR APIs.
 
 
 # Installing
-Place the jar file inside the lib folder to your library folder. 
+Place the jar file inside the ```lib``` folder to your library folder. 
 You'll need to include the dependencies yourself (the list of dependency libraries 
-can be found inside the thrid-party folder)
+can be found inside the ```third-party``` folder)
 
 
 # Usage
-Here are some examples you can use the SDK to access all Hoiio's API (via HoiioService class)
+Here are some examples you can use the SDK to access all Hoiio's API (via Hoiio class)
 
 ``` java
 	// Create hoiio service
-	HoiioService hoiioService = new HoiioService("[APP_ID]", "[ACCESS_TOKEN]");
+	Hoiio hoiio = new Hoiio("[APP_ID]", "[ACCESS_TOKEN]");
 
-	// Make a call
 	try {
-		hoiioService.call(dest1, dest2, callerID, tag, notifyURL);
-	} catch (HoiioException e) {
-		return e.getException();
-	}
+		// Make a call
+		CallTxn callTxn = hoiio.getVoiceService().makeCall(dest1, dest2);	
+		
+		// Get the response from Hoiio
+		System.out.println(callTxn.getTxnRef());
 
-	// Send an sms
-	try {
-		hoiioService.smsSend(dest, senderName, msg, tag, notifyUrl);
-	} catch (HoiioException e) {
-		return e.getException();
-	}
+		// Send an sms
+		SmsTxn smsTxn = hoiio.getSmsService().send(dest, msg);		
+		
+		// Get the response from Hoiio
+		System.out.println(smsTxn.getTxnRef());
 
-	// Make an outgoing IVR
-	try {
-		hoiioService.ivrDial(msg, dest, callerID, tag, notifyUrl);
+		// Get sms history
+		SmsHistory smsHistory = hoiio.getSmsService().fetchHistory();
+		for (Sms sms : smsHistory.getSmsList()) {
+			System.out.println(sms.getContent());
+			System.out.println(sms.getDest());
+			System.out.println(sms.getSmsStatus().toString());
+			System.out.println(sms.getTag());
+			System.out.println(sms.getTxnRef());
+			System.out.println(sms.getDebit());
+			System.out.println(sms.getDate());
+			System.out.println(sms.getRate());
+			System.out.println(sms.getSplitCount());
+			System.out.println(sms.getCurrency().toString());
+		}
 	} catch (HoiioException e) {
-		return e.getException();
+		// This is thrown when the request doesn't return success_ok
+		System.out.println(e.getStatus().toString());
+		System.out.println(e.getContent());
 	}
 ```
-
-
-# Examples
-Most of the examples are written using Google App Engine. (http://code.google.com/appengine/)
-
-Import the examples into Eclipse (http://www.eclipse.org/), replace all the "[something]"
-with your desired value: e.g.: [APP_ID] is the application ID you get when you create a app
-
-You can run locally by using Eclipse or upload it to App Engine 
-(http://code.google.com/appengine/docs/java/gettingstarted/uploading.html)
-
 
 # License
 This project is under MIT License (http://en.wikipedia.org/wiki/MIT_License).

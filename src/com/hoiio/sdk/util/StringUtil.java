@@ -1,19 +1,34 @@
 package com.hoiio.sdk.util;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
+/*
+Copyright (C) 2012 Hoiio Pte Ltd (http://www.hoiio.com)
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.StringTokenizer;
-
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -21,57 +36,11 @@ import org.apache.http.message.BasicNameValuePair;
 
 public class StringUtil {
 	
-	public static String dateToString(Date date) {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static Map<String, Object> jsonToMap(JSONObject json) {
-		Iterator<String> keys = json.keys();
-		Map<String, Object> outMap = new HashMap<String, Object>();
-		while(keys.hasNext()) {
-			String key = keys.next();
-			String value = json.getString(key);
-						
-			try {
-				/** If the string is JSON type, further get the nested JSONObject **/
-				JSONObject nestedJson = JSONObject.fromObject(value);
-				Iterator<String> nestedKeys = json.keys();
-				Map<String, Object> nestedMap = new HashMap<String, Object>();
-				while(nestedKeys.hasNext()) {
-					String nestedKey = nestedKeys.next();
-					nestedMap.put(nestedKey, nestedJson.getString(nestedKey));
-				}
-				outMap.put(key, nestedMap);
-			} catch (JSONException e) {
-				/** If the string is not JSON format, treat as a normal string **/
-				outMap.put(key, value);
-			}
-		}
-		return outMap;
-	}
-	
-	public static Map<String, String> parseNvp(final String inputString) {
-		if (inputString == null || inputString.trim().equals("")) {
-			return new HashMap<String, String>();
-		}
-
-		final Map<String, String> hm = new HashMap<String, String>();
-
-		final StringTokenizer st = new StringTokenizer(inputString, "&;");
-
-		while (st.hasMoreTokens()) {
-			final String s = st.nextToken();
-			final String[] nvp = s.split("=", 2);
-			try {
-				hm.put(nvp[0], URLDecoder.decode(String.valueOf(nvp[1]), "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				return new HashMap<String, String>();
-			}
-		}
-		return hm;
-	}
-	
+	/**
+	 * Converts the {@code Map} to URL encoded {@code String}
+	 * @param map {@code Map<String, String>}
+	 * @return The encoded URL {@code String}
+	 */
 	public static String convertMapToUrlEncodedString(Map<String, String> map) {
 		if (map == null) {
 			return "";
@@ -84,6 +53,27 @@ public class StringUtil {
 		return URLEncodedUtils.format(qparams, "UTF-8");
 	}
 	
+	/**
+	 * Converts the {@code List} to comma-separated {@code String}
+	 * @param dests {@code List<String>}
+	 * @return The comma-separated {@code String}
+	 */
+	public static String convertListToString(List<String> dests) {
+		StringBuilder destString = new StringBuilder();
+		for (String dest : dests) {
+			destString.append(dest + ",");
+		}
+		
+		// remove the last ","
+		destString.deleteCharAt(destString.length() - 1);
+		return destString.toString();
+	}
+	
+	/**
+	 * Checks for the {@code String} is empty or not. It checks both nullability and emptiness
+	 * @param str {@code String} to check
+	 * @return whether this string is empty or not
+	 */
 	public static boolean isEmpty(String str) {
 		return (str == null || str.isEmpty());
 	}
