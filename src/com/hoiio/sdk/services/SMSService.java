@@ -83,17 +83,25 @@ public class SmsService extends HttpService {
 	 * Retrieves the history of SMS sent or received by this application.
 	 * @param from (optional) Retrieve SMS history made by this app starting from this date/time in "YYYY-MM-DD HH:MM:SS" (GMT+8) format. E.g. "2010-01-01 00:00:00". If omitted, SMS history will be retrieved from the earliest transaction.
 	 * @param to (optional) Retrieve SMS history made by this app before this date/time in "YYYY-MM-DD HH:MM:SS" (GMT+8) format. E.g. "2010-01-01 00:00:00". If omitted, SMS history will be retrieved up to the current point of time.
-	 * @param page (optional) Each request returns a maximum of 100 entries. This parameter indicates which subset of entries to return.
+	 * @param page (optional) Each request returns a maximum of 100 entries. This parameter indicates which subset of entries to return. If omitted, the first page will be returned.
 	 * @return Object containing all the responses from the server
 	 * @throws HoiioException
 	 */
 	public SmsHistory fetchHistory(Date from, Date to, Integer page) throws HoiioException {
 		
 		HoiioRequest map = new HoiioRequest();
-				
-		map.put(Params.FROM.toString(), DateUtil.dateToString(from), false);
-		map.put(Params.TO.toString(), DateUtil.dateToString(to), false);
-		map.put(Params.PAGE.toString(), page.toString(), false);
+		
+		if (from != null) {
+			map.put(Params.FROM.toString(), DateUtil.dateToString(from), false);
+		}
+		
+		if (to != null) {
+			map.put(Params.TO.toString(), DateUtil.dateToString(to), false);
+		}
+		
+		if (page != null) {
+			map.put(Params.PAGE.toString(), page.toString(), false);
+		}
 				
 		return new SmsHistory(doHttpPost(URL_SMS_GET_HISTORY, map));
 	}
