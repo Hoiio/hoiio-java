@@ -32,14 +32,14 @@ import com.hoiio.sdk.objects.HoiioResponse;
 public class BulkSmsTxn extends HoiioResponse {
 	
 	private static enum Params {
-		TXN_REF;
+		BULK_TXN_REF;
 		
 		public String toString() {
 			return this.name().toLowerCase();
 		}
 	}
 	
-	private String txnRef;
+	private String bulkTxnRef;
 	
 	/**
 	 * Constructs a new {@code BulkSmsTxn} object by decoding the {@code JSONObject} as a response from the HTTP Request 
@@ -48,15 +48,15 @@ public class BulkSmsTxn extends HoiioResponse {
 	public BulkSmsTxn(JSONObject output) {
 		response = output.toString();
 		
-		txnRef = output.getString(Params.TXN_REF.toString());
+		bulkTxnRef = output.getString(Params.BULK_TXN_REF.toString());
 	}
 
 	/**
 	 * Gets the unique reference ID for this transaction
 	 * @return A unique reference ID for this Bulk SMS transaction.
 	 */
-	public String getTxnRef() {
-		return txnRef;
+	public String getBulkTnRef() {
+		return bulkTxnRef;
 	}
 	
 }
