@@ -22,9 +22,4 @@ See LICENSE file for details.
 
 
 # Contacts
-If you have any questions, please feel free to contact us:
-
-* Twitter:        @hoiiotweets
-* Google Groups:  https://groups.google.com/forum/#!forum/hoiio-developers
-* Facebook:       http://www.facebook.com/Hoiio
-* Blog:           http://devblog.hoiio.com/
+If you have any questions, please feel free to contact us via email: developer@hoiio.com
