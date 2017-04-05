@@ -60,6 +60,7 @@ public class IvrService extends HttpService {
 	private static final String URL_IVR_PLAY = "ivr/middle/play";
 	private static final String URL_IVR_GATHER = "ivr/middle/gather";
 	private static final String URL_IVR_RECORD = "ivr/middle/record";
+	private static final String URL_IVR_MONITOR = "ivr/middle/monitor";
 	private static final String URL_IVR_TRANSFER = "ivr/end/transfer";
 	private static final String URL_IVR_HANGUP = "ivr/end/hangup";
 	
@@ -213,7 +214,7 @@ public class IvrService extends HttpService {
 		map.put(Params.MSG.toString(), msg, false);
 		map.put(Params.TAG.toString(), tag, false);
 		
-		return new Monitor(doHttpPost(URL_IVR_RECORD, map));
+		return new Monitor(doHttpPost(URL_IVR_MONITOR, map));
 	}	
 	
 	/**
