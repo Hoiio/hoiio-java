@@ -48,9 +48,9 @@ import com.hoiio.sdk.objects.ivr.Transfer;
 public class IvrService extends HttpService {
 	
 	private static enum Params {
-		DEST, MSG, CALLER_ID, TAG, NOTIFY_URL, SESSION, MAX_DIGITS,
+		DEST, MSG, CALLER_ID, TAG, NOTIFY_URL, MONITOR_NOTIFY_URL, SESSION, MAX_DIGITS,
 		TIMEOUT, ATTEMPTS, MAX_DURATION, ON_FAILURE;
-		
+
 		public String toString() {
 			return this.name().toLowerCase();
 		}
@@ -189,28 +189,31 @@ public class IvrService extends HttpService {
 	 * Records the call conversation, including any voice messages
 	 * @param session The unique session ID for this particular call.
 	 * @param notifyUrl A fully-qualified HTTP/S URL on your web server to be notified when this action has completed execution
+	 * @param monitorNotifyUrl A fully-qualified HTTP/S URL on your web server to be notified when recording process has completed execution
 	 * @return Object containing all the responses from the server
 	 * @throws HoiioException
 	 */
-	public Monitor monitor(String session, String notifyUrl) throws HoiioException {
-		return monitor(session, notifyUrl, null, null);
+	public Monitor monitor(String session, String notifyUrl, String monitorNotifyUrl) throws HoiioException {
+		return monitor(session, notifyUrl, monitorNotifyUrl,null, null);
 	}
 	
 	/**
 	 * Records the call conversation, including any voice messages
 	 * @param session The unique session ID for this particular call.
 	 * @param notifyUrl A fully-qualified HTTP/S URL on your web server to be notified when this action has completed execution
+	 * @param monitorNotifyUrl A fully-qualified HTTP/S URL on your web server to be notified when recording process has completed execution
 	 * @param msg (optional) This is the message that you want to play to inform the user before the start of the recording. Max 500 characters.
 	 * @param tag (optional) This is a text string containing your own reference ID for this transaction. This value will be included in the response for Notification for your reference. Max 256 characters.
 	 * @return Object containing all the responses from the server
 	 * @throws HoiioException
 	 */
-	public Monitor monitor(String session, String notifyUrl, String msg, 
+	public Monitor monitor(String session, String notifyUrl, String monitorNotifyUrl, String msg,
 			String tag) throws HoiioException {
 		HoiioRequest map = new HoiioRequest();
 		
 		map.put(Params.SESSION.toString(), session, true);
 		map.put(Params.NOTIFY_URL.toString(), notifyUrl, true);
+		map.put(Params.MONITOR_NOTIFY_URL.toString(), monitorNotifyUrl, false);
 		map.put(Params.MSG.toString(), msg, false);
 		map.put(Params.TAG.toString(), tag, false);
 		
